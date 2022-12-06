@@ -1,13 +1,13 @@
-import os
 import re
 import time
 from threading import Thread
-from slack_bolt import App
+
 from revChatGPT.revChatGPT import Chatbot
+from slack_bolt import App
 
 ChatGPTConfig = {
-        "Authorization": "<Your Bearer Token Here>", # This is optional
-        "session_token": os.environ['CHATGPT_SESSION_TOKEN']
+        "email": "<YOUR_EMAIL>",
+        "password": "<YOUR_PASSWORD>"
     }
 
 app = App()
