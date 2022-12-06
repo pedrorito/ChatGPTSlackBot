@@ -6,8 +6,8 @@ from revChatGPT.revChatGPT import Chatbot
 from slack_bolt import App
 
 ChatGPTConfig = {
-        "email": "<YOUR_EMAIL>",
-        "password": "<YOUR_PASSWORD>"
+        "email": os.environ['CHATGPT_EMAIL'],
+        "password": os.environ['CHATGPT_PASSWORD']
     }
 
 app = App()
