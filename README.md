@@ -1,4 +1,4 @@
-# revChatGPT
+# revChatGPT for Slack
 
 This is a simple Slackbot that uses the `revChatGPT` package to respond to messages in Slack. It is designed to be used with the Slack Events API, and it listens for `app_mention` events, which are triggered when a user mentions the bot in a Slack channel.
 
@@ -8,20 +8,28 @@ The `revChatGPT` package is used to handle authentication and communication with
 
 ## Usage
 
-To use the bot, you will need to install the dependencies and set the `CHATGPT_EMAIL` and `CHATGPT_PASSWORD` environment variables with your OpenAI credentials. You can then run the `main.py` script to start the bot.
+To use the bot, you will need to install the dependencies and set the `CHATGPT_EMAIL` and `CHATGPT_PASSWORD` environment variables with your OpenAI credentials. You also need to set `SLACK_SIGNING_SECRET` and `SLACK_BOT_TOKEN` environment variables after creating the Slack App. You can then run the `app.py` script to start the bot.
 
 ```python
 pip install -r requirements.txt
+export SLACK_SIGNING_SECRET=slack_signing_secret
+export SLACK_BOT_TOKEN=slack_bot_token
 export CHATGPT_EMAIL=your_openai_email
 export CHATGPT_PASSWORD=your_openai_password
-python main.py
+python app.py
 ```
 
 Once the bot is running, you can mention it in a Slack channel to send it a message. For example, you can type `@my-bot hello` to send the message "hello" to the bot. The bot will respond with a generated message based on the GPT-3 model.
 
+Alternatively, you can use the containerized version by setting the environment variables in the `variables.env` file and then run
+
+```
+docker-compose up -d
+```
+
 ## Configuration
 
-The `ChatGPTConfig` dictionary at the top of the `main.py` script contains the configuration for the `revChatGPT` package. It specifies the email and password for the OpenAI account that the bot will use to authenticate with the GPT-3 API. These values are read from the `CHATGPT_EMAIL` and `CHATGPT_PASSWORD` environment variables.
+The `ChatGPTConfig` dictionary at the top of the `app.py` script contains the configuration for the `revChatGPT` package. It specifies the email and password for the OpenAI account that the bot will use to authenticate with the GPT-3 API. These values are read from the `CHATGPT_EMAIL` and `CHATGPT_PASSWORD` environment variables.
 
 The `conversation_id` parameter in the `Chatbot` constructor is used to specify the ID of the conversation that the bot should use. If this parameter is not provided, the `revChatGPT` package will generate a new conversation ID for each message that the bot receives.
 
