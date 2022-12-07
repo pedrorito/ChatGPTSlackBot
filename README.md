@@ -37,7 +37,7 @@ The `conversation_id` parameter in the `Chatbot` constructor is used to specify 
 
 The bot uses a pre-trained GPT-3 model, which means that its responses are limited to the information that is contained in the model. It may not be able to respond accurately to messages that are outside of the scope of the pre-trained model.
 
-Additionally, the bot is only designed to handle `app_mention` events, so it will not respond to other types of messages. This can be easily extended by adding more event handlers to the `main.py` script.
+Additionally, the bot is only designed to handle `app_mention` events, so it will not respond to other types of messages. This can be easily extended by adding more event handlers to the `app.py` script.
 
 ## Notes
 
