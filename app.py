@@ -18,13 +18,16 @@ chatbot = Chatbot(ChatGPTConfig, conversation_id=None)
 @app.event("app_mention")
 def event_test(event, say):
     prompt = re.sub('(?:\s)<@[^, ]*|(?:^)<@[^, ]*', '', event['text'])
-    response = chatbot.get_chat_response(prompt)
-    user = event['user']
-    user = f"<@{user}> you asked:"
-    asked = ['>',prompt]
-    asked = "".join(asked)
-    send = [user,asked,response["message"]]
-    send = "\n".join(send)
+    try:
+        response = chatbot.get_chat_response(prompt)
+        user = event['user']
+        user = f"<@{user}> you asked:"
+        asked = ['>',prompt]
+        asked = "".join(asked)
+        send = [user,asked,response["message"]]
+        send = "\n".join(send)
+    except Exception as e:
+        send = "We're experiencing exceptionally high demand. Please, try again."
     say(send)
 
 def chatgpt_refresh():
