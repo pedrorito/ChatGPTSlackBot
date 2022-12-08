@@ -39,7 +39,7 @@ The `conversation_id` parameter in the `Chatbot` constructor is used to specify 
 
 By default, `app.py` is exposing port 4000 for Slack events. You may change the port number in the end of the script.
 
-To configure the Slack App, follow [these](https://github.com/acheong08/ChatGPT) example instructions from the official SlackApi GitHub account.
+To configure the Slack App, follow [these](https://github.com/slackapi/python-slack-events-api/blob/main/example/README.rst) example instructions from the official SlackApi GitHub account.
 
 For this bot, the required Scopes in `OAuth & Permissions` are:
 * app_mentions:read
