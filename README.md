@@ -21,13 +21,13 @@ export CHATGPT_PASSWORD=your_openai_password
 python app.py
 ```
 
-Once the bot is running, you can mention it in a Slack channel to send it a message. For example, you can type `@my-bot hello` to send the message "hello" to the bot. The bot will respond with a generated message based on the GPT-3 model.
-
 Alternatively, you can use the containerized version by setting the environment variables in the `variables.env` file and then run
 
 ```
 docker-compose up -d
 ```
+
+Once the bot is running, you can mention it in a Slack channel to send it a message. For example, you can type `@my-bot hello` to send the message "hello" to the bot. The bot will respond with a generated message based on the GPT-3 model.
 
 ## ChatGPT Configuration
 
