@@ -2,6 +2,12 @@
 [![playwright-version](https://img.shields.io/badge/revChatGPT-0.0.31.5-green.svg)](https://github.com/acheong08/ChatGPT)
 [![license](https://img.shields.io/badge/License-GPL%202.0-brightgreen.svg)](LICENSE)
 
+## Update Dec 2022
+
+This repository uses [acheong08/ChatGPT](https://github.com/acheong08/ChatGPT) `revChatGPT` package to interact with ChatGPT. Since `revChatGPT` was archived due to difficulties in bypassing Cloudflare and Google reCAPTCHA, this repository is also on hold until new developments.
+
+---
+
 This is a simple Slackbot that uses the [acheong08/ChatGPT](https://github.com/acheong08/ChatGPT) `revChatGPT` package to respond to messages in Slack. It is designed to be used with the Slack Events API, and it listens for `app_mention` events, which are triggered when a user mentions the bot in a Slack channel.
 
 When the bot receives a `app_mention` event, it extracts the user's message from the event payload, sends it to the `revChatGPT` package to generate a response, and then sends the response back to the user via Slack.
