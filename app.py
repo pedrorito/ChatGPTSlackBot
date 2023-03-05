@@ -7,7 +7,7 @@ from revChatGPT.V3 import Chatbot
 from slack_bolt import App
 
 ChatGPTConfig = {
-        "api_key":, os.getenv("OPENAI_API_KEY"),
+        "api_key": os.getenv("OPENAI_API_KEY"),
     }
 if os.getenv("OPENAI_ENGINE"):
     ChatGPTConfig["engine"] = os.getenv("OPENAI_ENGINE")
