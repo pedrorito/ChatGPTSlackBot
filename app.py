@@ -28,7 +28,12 @@ def event_test(event, say):
         send = "\n".join(send)
     except Exception as e:
         send = "We're experiencing exceptionally high demand. Please, try again."
-    say(send)
+
+    # Get the `ts` value of the original message
+    original_message_ts = event["ts"]
+
+    # Use the `app.event` method to send a reply to the message thread
+    say(send, thread_ts=original_message_ts)
 
 def chatgpt_refresh():
     while True:
