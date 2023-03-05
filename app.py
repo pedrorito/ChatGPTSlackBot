@@ -13,7 +13,7 @@ if os.getenv("OPENAI_ENGINE"):
     ChatGPTConfig["engine"] = os.getenv("OPENAI_ENGINE")
 
 app = App()
-chatbot = Chatbot(ChatGPTConfig)
+chatbot = Chatbot(**ChatGPTConfig)
 
 # Listen for an event from the Events API
 @app.event("app_mention")
