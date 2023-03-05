@@ -20,24 +20,28 @@ chatbot = Chatbot(**ChatGPTConfig)
 def event_test(event, say):
     prompt = re.sub('(?:\s)<@[^, ]*|(?:^)<@[^, ]*', '', event['text'])
     try:
-        response = chatbot.get_chat_response(prompt)
+        response = chatbot.ask(prompt)
         user = event['user']
         user = f"<@{user}> you asked:"
         asked = ['>',prompt]
         asked = "".join(asked)
-        send = [user,asked,response["message"]]
+        send = [user,asked,response]
         send = "\n".join(send)
     except Exception as e:
+        print(e)
         send = "We're experiencing exceptionally high demand. Please, try again."
-    say(send)
+
+    # Get the `ts` value of the original message
+    original_message_ts = event["ts"]
+
+    # Use the `app.event` method to send a reply to the message thread
+    say(send, thread_ts=original_message_ts)
 
 def chatgpt_refresh():
     while True:
-        chatbot.refresh_session()
         time.sleep(60)
 
 if __name__ == "__main__":
     thread = Thread(target=chatgpt_refresh)
     thread.start()
     app.start(4000)  # POST http://localhost:4000/slack/events
-    
