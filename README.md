@@ -22,8 +22,7 @@ To use the bot, you will need to install the dependencies and set the `CHATGPT_E
 pip install -r requirements.txt
 export SLACK_SIGNING_SECRET=slack_signing_secret
 export SLACK_BOT_TOKEN=slack_bot_token
-export CHATGPT_EMAIL=your_openai_email
-export CHATGPT_PASSWORD=your_openai_password
+export OPENAI_API_KEY=you_openai_api_key
 python app.py
 ```
 

@@ -3,16 +3,17 @@ import re
 import time
 from threading import Thread
 
-from revChatGPT.revChatGPT import Chatbot
+from revChatGPT.V3 import Chatbot
 from slack_bolt import App
 
 ChatGPTConfig = {
-        "email": os.environ['CHATGPT_EMAIL'],
-        "password": os.environ['CHATGPT_PASSWORD']
+        "api_key":, os.getenv("OPENAI_API_KEY"),
     }
+if os.getenv("OPENAI_ENGINE"):
+    ChatGPTConfig["engine"] = os.getenv("OPENAI_ENGINE")
 
 app = App()
-chatbot = Chatbot(ChatGPTConfig, conversation_id=None)
+chatbot = Chatbot(ChatGPTConfig)
 
 # Listen for an event from the Events API
 @app.event("app_mention")
