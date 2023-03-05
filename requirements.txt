@@ -1,2 +1,2 @@
 slack_bolt
-revChatGPT
+revChatGPT>=3.0.0
