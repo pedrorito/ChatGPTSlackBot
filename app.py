@@ -19,11 +19,11 @@ chatbot = Chatbot(**ChatGPTConfig)
 
 @app.event("app_mention")
 def event_test(event, say):
-    prompt = re.sub('(?:\s)<@[^, ]*|(?:^)<@[^, ]*', '', event['text'])
+    prompt = re.sub('\\s<@[^, ]*|^<@[^, ]*', '', event['text'])
     try:
         response = chatbot.ask(prompt)
         user = event['user']
-        send = f"@{user}: {response}"
+        send = f"<@{user}> {response}"
     except Exception as e:
         print(e)
         send = "We're experiencing exceptionally high demand. Please, try again."

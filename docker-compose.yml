@@ -9,4 +9,4 @@ services:
     env_file:
       - ./variables.env
     ports:
-      - 4000:4000
+      - "4000:4000"

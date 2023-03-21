@@ -1,2 +1,2 @@
-slack_bolt
+slack_bolt>=1.0.0
 revChatGPT>=3.0.0
