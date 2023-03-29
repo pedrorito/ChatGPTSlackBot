@@ -34,6 +34,19 @@ def event_test(event, say):
     # Use the `app.event` method to send a reply to the message thread
     say(send, thread_ts=original_message_ts)
 
+@app.event("message")
+def event_test(event, say):
+    prompt = re.sub('\\s<@[^, ]*|^<@[^, ]*', '', event['text'])
+    try:
+        response = chatbot.ask(prompt)
+        user = event['user']
+        send = response
+    except Exception as e:
+        print(e)
+        send = "We're experiencing exceptionally high demand. Please, try again."
+
+    # reply message to new message
+    say(send)
 
 def chatgpt_refresh():
     while True:

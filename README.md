@@ -45,6 +45,10 @@ For this bot, the required Scopes in `OAuth & Permissions` are:
 * chat:write
 * im:write
 
+For direct message required & config :
+* `Enable bot direct messages` go to : Features -> App Home -> (Enable) Messages Tab
+* `OAuth & Permissions` im:history
+
 In the `Event Subscriptions`, you need to subscribe to the `app_mention` event.
 
 ## Limitations
