@@ -1,7 +1,7 @@
-FROM python
+FROM python:alpine
 
 WORKDIR /app
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+RUN wget -O - https://sh.rustup.rs -q | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 COPY requirements.txt /app
 
