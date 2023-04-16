@@ -47,7 +47,7 @@ For this bot, the required Scopes in `OAuth & Permissions` are:
 
 For direct message required & config :
 * `Enable bot direct messages` go to : Features -> App Home -> (Enable) Messages Tab
-* `OAuth & Permissions` im:history
+* `OAuth & Permissions` im:history and message:im
 
 In the `Event Subscriptions`, you need to subscribe to the `app_mention` event.
 
