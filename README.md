@@ -10,7 +10,7 @@ The `revChatGPT` package is used to handle authentication and communication with
 
 ## Usage
 
-To use the bot, you will need to install the dependencies and set the `CHATGPT_EMAIL` and `CHATGPT_PASSWORD` environment variables with your OpenAI credentials. You also need to set `SLACK_SIGNING_SECRET` and `SLACK_BOT_TOKEN` environment variables after creating the Slack App. You can then run the `app.py` script to start the bot.
+To use the bot, you will need to install the dependencies and set the `OPENAI_API_KEY` environment variable that you can get from https://platform.openai.com/account/api-keys. You also need to set `SLACK_SIGNING_SECRET` and `SLACK_BOT_TOKEN` environment variables after creating the Slack App. You can then run the `app.py` script to start the bot.
 
 ```python
 pip install -r requirements.txt
@@ -30,7 +30,7 @@ Once the bot is running, you can mention it in a Slack channel to send it a mess
 
 ## ChatGPT Configuration
 
-The `ChatGPTConfig` dictionary at the top of the `app.py` script contains the configuration for the `revChatGPT` package. It specifies the email and password for the OpenAI account that the bot will use to authenticate with the GPT-3 API. These values are read from the `CHATGPT_EMAIL` and `CHATGPT_PASSWORD` environment variables.
+The `ChatGPTConfig` dictionary at the top of the `app.py` script contains the configuration for the `revChatGPT` package. It specifies the API token for for the OpenAI account that the bot will use to authenticate with the GPT-3 API. The value is read from the `OPENAI_API_KEY` environment variable.
 
 The `conversation_id` parameter in the `Chatbot` constructor is used to specify the ID of the conversation that the bot should use. If this parameter is not provided, the `revChatGPT` package will generate a new conversation ID for each message that the bot receives.
 
@@ -54,8 +54,6 @@ In the `Event Subscriptions`, you need to subscribe to the `app_mention` event.
 ## Limitations
 
 The bot uses a pre-trained GPT-3 model, which means that its responses are limited to the information that is contained in the model. It may not be able to respond accurately to messages that are outside of the scope of the pre-trained model.
-
-Additionally, the bot is only designed to handle `app_mention` events, so it will not respond to other types of messages. This can be easily extended by adding more event handlers to the `app.py` script.
 
 ## Notes
 
