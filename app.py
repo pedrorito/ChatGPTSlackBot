@@ -19,36 +19,38 @@ chatbot = Chatbot(**ChatGPTConfig)
 flask_app = Flask(__name__)
 
 
-@app.event("app_mention")
-def event_test(event, say):
+def handle_event(event, say, is_mention):
     prompt = re.sub('\\s<@[^, ]*|^<@[^, ]*', '', event['text'])
     try:
         response = chatbot.ask(prompt)
         user = event['user']
-        send = f"<@{user}> {response}"
+
+        if is_mention:
+            send = f"<@{user}> {response}"
+        else:
+            send = response
     except Exception as e:
         print(e)
         send = "We're experiencing exceptionally high demand. Please, try again."
 
-    # Get the `ts` value of the original message
-    original_message_ts = event["ts"]
+    if is_mention:
+        # Get the `ts` value of the original message
+        original_message_ts = event["ts"]
+    else:
+        original_message_ts = None
 
-    # Use the `app.event` method to send a reply to the message thread
+    # Use the `app.event` method to send a message
     say(send, thread_ts=original_message_ts)
 
-@app.event("message")
-def event_test(event, say):
-    prompt = re.sub('\\s<@[^, ]*|^<@[^, ]*', '', event['text'])
-    try:
-        response = chatbot.ask(prompt)
-        user = event['user']
-        send = response
-    except Exception as e:
-        print(e)
-        send = "We're experiencing exceptionally high demand. Please, try again."
 
-    # reply message to new message
-    say(send)
+@app.event("app_mention")
+def handle_mention(event, say):
+    handle_event(event, say, is_mention=True)
+
+
+@app.event("message")
+def handle_message(event, say):
+    handle_event(event, say, is_mention=False)
 
 
 @flask_app.route("/", methods=["GET"])
