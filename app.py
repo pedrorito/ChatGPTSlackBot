@@ -3,7 +3,6 @@ import re
 import sys
 import time
 from threading import Thread
-from flask import Flask
 
 from revChatGPT.V3 import Chatbot
 from slack_bolt import App
@@ -17,7 +16,6 @@ if os.getenv("OPENAI_ENGINE"):
 
 app = App()
 chatbot = Chatbot(**ChatGPTConfig)
-flask_app = Flask(__name__)
 
 
 def handle_event(event, say, is_mention):
@@ -56,11 +54,6 @@ def handle_mention(event, say):
 @app.event("message")
 def handle_message(event, say):
     handle_event(event, say, is_mention=False)
-
-
-@flask_app.route("/", methods=["GET"])
-def health():
-    return ""
 
 
 def chatgpt_refresh():
