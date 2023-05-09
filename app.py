@@ -1,9 +1,9 @@
 import os
 import re
 import sys
+import time
 from threading import Thread
 
-from flask import Flask
 from revChatGPT.V3 import Chatbot
 from slack_bolt import App
 
@@ -14,7 +14,6 @@ ChatGPTConfig = {
 if os.getenv("OPENAI_ENGINE"):
     ChatGPTConfig["engine"] = os.getenv("OPENAI_ENGINE")
 
-flask_app = Flask(__name__)
 app = App()
 chatbot = Chatbot(**ChatGPTConfig)
 
@@ -57,17 +56,13 @@ def handle_message(event, say):
     handle_event(event, say, is_mention=False)
 
 
-def start_flask_app():
-    flask_app.run(host='0.0.0.0', port=3000)
-
-
-# Define a health check route that returns a 200 HTTP response code
-@flask_app.route('/health', methods=['GET'])
-def health_check():
-    return 'Bot is healthy'
+def chatgpt_refresh():
+    while True:
+        time.sleep(60)
 
 
 if __name__ == "__main__":
     print("Bot Started!", file=sys.stderr)
-    thread = Thread(target=start_flask_app).start()
-    app.start(port=4000)  # POST http://localhost:4000/slack/events
+    thread = Thread(target=chatgpt_refresh)
+    thread.start()
+    app.start(4000)  # POST http://localhost:4000/slack/events
