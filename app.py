@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 import time
 from threading import Thread
 from flask import Flask
@@ -20,18 +21,22 @@ flask_app = Flask(__name__)
 
 
 def handle_event(event, say, is_mention):
-    prompt = re.sub('\\s<@[^, ]*|^<@[^, ]*', '', event['text'])
+    prompt = re.sub("\\s<@[^, ]*|^<@[^, ]*", "", event["text"])
+
+    # Each thread should be a separate conversation
+    convo_id = event.get("thread_ts") or event.get("ts") or ""
+
     try:
-        response = chatbot.ask(prompt)
-        user = event['user']
+        response = chatbot.ask(prompt, convo_id=convo_id)
+        user = event["user"]
 
         if is_mention:
             send = f"<@{user}> {response}"
         else:
             send = response
     except Exception as e:
-        print(e)
-        send = "We're experiencing exceptionally high demand. Please, try again."
+        print(e, file=sys.stderr)
+        send = "We are experiencing exceptionally high demand. Please, try again."
 
     if is_mention:
         # Get the `ts` value of the original message
@@ -64,6 +69,7 @@ def chatgpt_refresh():
 
 
 if __name__ == "__main__":
+    print("Bot Started!", file=sys.stderr)
     thread = Thread(target=chatgpt_refresh)
     thread.start()
     app.start(4000)  # POST http://localhost:4000/slack/events
